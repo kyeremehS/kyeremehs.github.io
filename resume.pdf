@@ -1,0 +1,11 @@
+This is a placeholder file. Please replace this with your actual resume PDF file.
+
+To add your real resume:
+1. Delete this file
+2. Add your actual PDF resume named "resume.pdf" to this folder (public/)
+3. Or update the resume.url in src/data.js to point to your hosted resume
+
+For hosting options:
+- Google Drive: Use "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID"
+- Dropbox: Use direct download link
+- Your own server or CDN
