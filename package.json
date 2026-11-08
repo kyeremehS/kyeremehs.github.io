@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/prepare-source.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/prepare-source.mjs",
     "build": "vite build",
-    "deploy:main": "npm run build && node scripts/sync-main-deploy.mjs",
+    "postbuild": "node scripts/sync-main-deploy.mjs",
+    "deploy:main": "npm run build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",

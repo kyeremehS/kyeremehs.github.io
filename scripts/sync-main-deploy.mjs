@@ -38,6 +38,14 @@ async function syncDistToRoot() {
   await cp(distAssetsDir, rootAssetsDir, { recursive: true, force: true });
   await cp(distIndex, rootIndex, { force: true });
 
+  // Root-level static files emitted from public/ (favicon, resume, robots…)
+  const distFiles = await readdir(distDir, { withFileTypes: true });
+  await Promise.all(
+    distFiles
+      .filter((entry) => entry.isFile() && /\.(svg|pdf|txt|xml|webmanifest)$/i.test(entry.name))
+      .map((entry) => cp(path.join(distDir, entry.name), path.join(rootDir, entry.name), { force: true }))
+  );
+
   console.log('Synced dist/index.html and dist/assets to root for main-branch Pages deployment.');
 }
 
