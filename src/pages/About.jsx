@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { CTABand, PageHeader, Reveal, SectionHeading } from "../components/ui";
 import { about, resume, site, socialLinks, stints } from "../data";
+import workspace from "../assets/workspace.jpg";
 
 export default function About() {
   return (
@@ -10,6 +11,18 @@ export default function About() {
         title={<>Samuel Kyeremeh — engineer, builder, one-person studio.</>}
         intro={about.intro}
       />
+
+      {/* PHOTO */}
+      <section>
+        <img
+          src={workspace}
+          alt="A quiet workspace with a laptop, plant and a view over the city"
+          width="1408"
+          height="768"
+          className="h-56 w-full border-b border-[var(--border)] object-cover md:h-96"
+          loading="lazy"
+        />
+      </section>
 
       <section className="section container-x">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">

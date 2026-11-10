@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { motion as Motion, useReducedMotion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { CTABand, Icon, Reveal, SectionHeading } from "../components/ui";
 import { PackageGrid } from "../components/PackageCard";
+import heroOffice from "../assets/hero-office.jpg";
 import {
   faqs,
   packages,
@@ -37,94 +38,19 @@ const advantages = [
   },
 ];
 
-function HeroMockup() {
-  const reduce = useReducedMotion();
-  return (
-    <Motion.div
-      initial={reduce ? { opacity: 1 } : { opacity: 0, y: 26 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-      className="relative"
-    >
-      <div className="overflow-hidden rounded-md border border-white/20 bg-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)]">
-        {/* browser chrome */}
-        <div className="flex items-center gap-3 border-b border-[var(--border)] bg-[var(--bg-alt)] px-4 py-2.5">
-          <span className="flex gap-1.5">
-            <i className="block h-2.5 w-2.5 rounded-full bg-[var(--border-strong)]" />
-            <i className="block h-2.5 w-2.5 rounded-full bg-[var(--border-strong)]" />
-            <i className="block h-2.5 w-2.5 rounded-full bg-[var(--border-strong)]" />
-          </span>
-          <span className="flex-1 truncate rounded bg-white px-3 py-1 text-center text-[0.7rem] muted">
-            yourbusiness.com.gh
-          </span>
-          <span className="hidden text-[0.68rem] font-semibold text-[var(--navy)] sm:block">
-            0.8s
-          </span>
-        </div>
-
-        {/* page mock */}
-        <div className="p-5">
-          <div className="flex items-center justify-between">
-            <span className="block h-3 w-24 rounded-sm bg-[var(--navy)]" />
-            <span className="flex gap-2">
-              <i className="block h-2 w-8 rounded-sm bg-[var(--border-strong)]" />
-              <i className="block h-2 w-8 rounded-sm bg-[var(--border-strong)]" />
-              <i className="block h-2 w-12 rounded-sm bg-[var(--amber)]" />
-            </span>
-          </div>
-
-          <div className="mt-5 grid gap-4 sm:grid-cols-[1.2fr_1fr]">
-            <div>
-              <span className="block text-[0.6rem] font-bold tracking-[0.14em] text-[var(--amber-600)] uppercase">
-                Open now
-              </span>
-              <span className="mt-2 block h-4 w-full max-w-[15rem] rounded-sm bg-[var(--navy)]" />
-              <span className="mt-2 block h-4 w-3/4 rounded-sm bg-[var(--navy)]" />
-              <span className="mt-3 block h-2 w-full rounded-sm bg-[var(--border-strong)]" />
-              <span className="mt-1.5 block h-2 w-5/6 rounded-sm bg-[var(--border-strong)]" />
-              <span className="mt-4 inline-block rounded-sm bg-[var(--amber)] px-4 py-1.5 text-[0.68rem] font-bold text-[var(--ink)]">
-                Book now
-              </span>
-            </div>
-
-            <div className="grid gap-2.5">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 rounded border border-[var(--border)] bg-[var(--bg-alt)] p-2.5"
-                >
-                  <span className="block h-8 w-8 shrink-0 rounded-sm bg-[var(--navy)]/15" />
-                  <span className="flex-1">
-                    <span className="block h-2 w-16 rounded-sm bg-[var(--border-strong)]" />
-                    <span className="mt-1.5 block h-1.5 w-10 rounded-sm bg-[var(--border)]" />
-                  </span>
-                  <span className="text-[0.6rem] font-bold text-[var(--navy)]">
-                    GHS
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-5 flex items-center justify-between rounded border border-[var(--border)] bg-[var(--bg-alt)] px-3 py-2 text-[0.65rem] muted">
-            <span>MTN MoMo · Paystack · Visa</span>
-            <span className="font-bold text-[var(--navy)]">SSL ✓</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute -bottom-4 -left-3 hidden items-center gap-2 rounded border border-[var(--border)] bg-white px-4 py-2 text-[0.78rem] font-semibold text-[var(--ink)] shadow-lg sm:flex">
-        <span className="dot" /> Live in 2–4 weeks
-      </div>
-    </Motion.div>
-  );
-}
-
 export default function Home() {
   return (
     <>
       {/* HERO */}
       <header className="band-navy relative overflow-hidden">
+        <div
+          className="hero-media"
+          style={{ backgroundImage: `url(${heroOffice})` }}
+          aria-hidden="true"
+        />
+        <div className="hero-overlay hidden md:block" aria-hidden="true" />
+        <div className="hero-overlay-mobile md:hidden" aria-hidden="true" />
+
         <div className="container-x relative grid items-center gap-12 pt-28 pb-16 md:pt-36 md:pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
           <div>
             <Motion.span
@@ -187,8 +113,6 @@ export default function Home() {
               ))}
             </Motion.dl>
           </div>
-
-          <HeroMockup />
         </div>
       </header>
 
@@ -261,7 +185,13 @@ export default function Home() {
             {advantages.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.07}>
                 <div>
-                  <span className="icon-line" style={{ background: "rgba(255,255,255,0.08)", color: "var(--amber)" }}>
+                  <span
+                    className="icon-line"
+                    style={{
+                      background: "rgba(255,255,255,0.08)",
+                      color: "var(--amber)",
+                    }}
+                  >
                     <Icon name={item.icon} />
                   </span>
                   <h3 className="text-[1.05rem] text-white">{item.title}</h3>

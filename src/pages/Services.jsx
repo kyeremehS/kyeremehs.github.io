@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { CTABand, Icon, PageHeader, Reveal, SectionHeading } from "../components/ui";
 import { services, stack, terms } from "../data";
+import teamCollab from "../assets/team-collab.jpg";
 
 const serviceIcons = ["websites", "stores", "apps"];
 
@@ -12,6 +13,17 @@ export default function Services() {
         title="Everything you need to sell online."
         intro="Websites, online stores and web apps — designed, built and launched by one person who stays accountable from first call to post-launch support."
       />
+
+      {/* PHOTO */}
+      <section>
+        <img
+          src={teamCollab}
+          alt="Three colleagues reviewing a website together on a laptop in an office"
+          width="1408"
+          height="768"
+          className="h-60 w-full border-b border-[var(--border)] object-cover md:h-[440px]"
+        />
+      </section>
 
       <section className="container-x">
         {services.map((service, i) => (
