@@ -31,6 +31,15 @@ export default function Pricing() {
         eyebrow="Pricing"
         title="Published prices. Fixed quotes."
         intro="Three packages, all with a year of domain, hosting, SSL and business emails included. Pick the closest fit — I'll confirm the exact scope on a short call before anything is charged."
+        action={
+          <a
+            href="/web-development-pricing.pdf"
+            download
+            className="btn btn-primary mt-8"
+          >
+            Download pricing (PDF)
+          </a>
+        }
       />
 
       <section className="container-x pt-14">

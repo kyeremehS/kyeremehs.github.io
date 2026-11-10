@@ -11,6 +11,7 @@
     "postbuild": "node scripts/sync-main-deploy.mjs",
     "deploy:main": "npm run build",
     "lint": "eslint .",
+    "pdf": "node scripts/build-pricing-pdf.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"

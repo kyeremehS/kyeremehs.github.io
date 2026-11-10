@@ -151,7 +151,7 @@ export function CTABand() {
   );
 }
 
-export function PageHeader({ eyebrow, title, intro }) {
+export function PageHeader({ eyebrow, title, intro, action }) {
   return (
     <header className="band-alt border-b border-[var(--border)]">
       <div className="container-x pt-28 pb-12 md:pt-36 md:pb-16">
@@ -159,6 +159,7 @@ export function PageHeader({ eyebrow, title, intro }) {
           <span className="eyebrow mb-4">{eyebrow}</span>
           <h1 className="h1 max-w-4xl">{title}</h1>
           {intro && <p className="lead mt-6">{intro}</p>}
+          {action}
         </Reveal>
       </div>
     </header>
