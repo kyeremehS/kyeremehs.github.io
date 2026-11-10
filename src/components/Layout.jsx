@@ -14,27 +14,29 @@ function ScrollToTop() {
 function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <nav
-      className="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
-      style={{
-        backgroundColor: scrolled ? "rgba(8, 9, 11, 0.82)" : "transparent",
-        backdropFilter: scrolled ? "blur(14px)" : "none",
-        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
-      }}
-    >
-      <div className="container-x flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
-        <Logo />
+  const closeMenu = () => setOpen(false);
 
-        <div className="hidden items-center gap-7 md:flex">
+  const overHero = pathname === "/" && !scrolled && !open;
+  const classes = [
+    "nav",
+    overHero ? "nav-over nav-on-photo" : "nav-solid",
+  ].join(" ");
+
+  return (
+    <nav className={classes}>
+      <div className="container-x flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
+        <Logo dark={overHero} onClick={closeMenu} />
+
+        <div className="hidden items-center gap-8 md:flex">
           {nav.map((item) => (
             <NavLink
               key={item.to}
@@ -47,7 +49,13 @@ function Nav() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Link to="/contact" className="btn btn-primary hidden sm:inline-flex">
+          <Link
+            to="/contact"
+            onClick={closeMenu}
+            className={`btn hidden sm:inline-flex ${
+              overHero ? "btn-amber" : "btn-primary"
+            }`}
+          >
             Get a quote
           </Link>
           <button
@@ -55,7 +63,9 @@ function Nav() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="grid h-10 w-10 place-items-center rounded-lg border border-[var(--border)] bg-[var(--surface)] md:hidden"
+            className={`grid h-10 w-10 place-items-center rounded border border-[var(--border-strong)] md:hidden ${
+              overHero ? "text-white" : "text-[var(--ink)]"
+            }`}
           >
             <span className="relative block h-3 w-4">
               <span
@@ -72,24 +82,21 @@ function Nav() {
       </div>
 
       {open && (
-        <div
-          className="border-t border-[var(--border)] md:hidden"
-          style={{ backgroundColor: "var(--bg)" }}
-          onClick={() => setOpen(false)}
-        >
+        <div className="border-t border-[var(--border)] bg-white md:hidden">
           <div className="container-x flex flex-col gap-1 py-4">
             {nav.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
+                onClick={closeMenu}
                 className={({ isActive }) =>
-                  `nav-link rounded-lg px-2 py-2.5${isActive ? " active" : ""}`
+                  `nav-link px-1 py-2.5${isActive ? " active" : ""}`
                 }
               >
                 {item.label}
               </NavLink>
             ))}
-            <Link to="/contact" className="btn btn-primary mt-3">
+            <Link to="/contact" onClick={closeMenu} className="btn btn-primary mt-3">
               Get a quote
             </Link>
           </div>
@@ -101,22 +108,22 @@ function Nav() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--bg-elev)]">
-      <div className="container-x grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <footer className="band-alt border-t border-[var(--border)]">
+      <div className="container-x grid gap-10 pt-14 pb-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
           <Logo />
           <p className="mt-4 max-w-xs text-sm muted">
-            Web development studio in Ghana. Websites, online stores and web
-            apps — live in 2–4 weeks, and you own the code.
+            Web development studio in Ghana. Websites, online stores and web apps
+            — live in 2–4 weeks, and you own the code.
           </p>
-          <div className="mt-5 flex gap-3">
+          <div className="mt-5 flex flex-wrap gap-2.5">
             {Object.entries(socialLinks).map(([key, href]) => (
               <a
                 key={key}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="pill capitalize transition-colors hover:border-[var(--accent)] hover:text-[var(--text)]"
+                className="pill capitalize"
               >
                 {key}
               </a>
@@ -125,17 +132,15 @@ function Footer() {
         </div>
 
         <div>
-          <h3 className="mono mb-4 text-[0.72rem] uppercase tracking-[0.16em] muted">
-            Services
-          </h3>
-          <ul className="space-y-2.5 text-sm">
+          <h3 className="label">Services</h3>
+          <ul className="mt-4 space-y-2.5 text-sm">
             {[
               ["Business websites", "/services"],
               ["Online stores", "/services"],
               ["Web apps & dashboards", "/services"],
             ].map(([label, to]) => (
               <li key={label}>
-                <Link to={to} className="nav-link">
+                <Link to={to} className="footer-link">
                   {label}
                 </Link>
               </li>
@@ -144,13 +149,11 @@ function Footer() {
         </div>
 
         <div>
-          <h3 className="mono mb-4 text-[0.72rem] uppercase tracking-[0.16em] muted">
-            Company
-          </h3>
-          <ul className="space-y-2.5 text-sm">
+          <h3 className="label">Company</h3>
+          <ul className="mt-4 space-y-2.5 text-sm">
             {nav.map((item) => (
               <li key={item.to}>
-                <Link to={item.to} className="nav-link">
+                <Link to={item.to} className="footer-link">
                   {item.label}
                 </Link>
               </li>
@@ -159,18 +162,16 @@ function Footer() {
         </div>
 
         <div>
-          <h3 className="mono mb-4 text-[0.72rem] uppercase tracking-[0.16em] muted">
-            Contact
-          </h3>
-          <ul className="space-y-2.5 text-sm">
+          <h3 className="label">Contact</h3>
+          <ul className="mt-4 space-y-2.5 text-sm">
             <li>
-              <a href={`mailto:${site.email}`} className="nav-link">
+              <a href={`mailto:${site.email}`} className="footer-link break-all">
                 {site.email}
               </a>
             </li>
             <li className="muted">{site.location}</li>
             <li>
-              <Link to="/contact" className="nav-link">
+              <Link to="/contact" className="footer-link">
                 Request a quote
               </Link>
             </li>
@@ -183,9 +184,7 @@ function Footer() {
           <span>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </span>
-          <span className="mono">
-            Built in Ghana · {site.email}
-          </span>
+          <span>Built in Ghana · {site.email}</span>
         </div>
       </div>
     </footer>

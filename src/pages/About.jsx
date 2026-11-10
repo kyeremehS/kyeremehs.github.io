@@ -21,7 +21,7 @@ export default function About() {
             ))}
 
             <Reveal className="mt-8 flex flex-wrap gap-3">
-              <a href={resume.url} className="btn btn-ghost" download>
+              <a href={resume.url} className="btn btn-outline" download>
                 {resume.label}
               </a>
               <Link to="/contact" className="btn btn-primary">
@@ -40,13 +40,14 @@ export default function About() {
                     className="border-b border-[var(--border)] py-4"
                   >
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <span className="text-[0.98rem]">{stint.role}</span>
+                      <span className="text-[0.98rem] font-semibold text-[var(--ink)]">
+                        {stint.role}
+                      </span>
                       <a
                         href={stint.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mono text-[0.75rem] link-underline"
-                        style={{ color: "var(--accent)" }}
+                        className="link-underline text-sm font-semibold text-[var(--navy)]"
                       >
                         {stint.company}
                       </a>
@@ -61,21 +62,16 @@ export default function About() {
       </section>
 
       {/* TIMELINE */}
-      <section className="section border-y border-[var(--border)] bg-[var(--bg-elev)]">
+      <section className="section band-alt border-y border-[var(--border)]">
         <div className="container-x">
           <SectionHeading eyebrow="Journey" title="How I got here." />
           <div className="mt-11 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {about.timeline.map((item, i) => (
               <Reveal key={item.year} delay={i * 0.07}>
                 <div className="card h-full">
-                  <span
-                    className="mono text-[0.72rem]"
-                    style={{ color: "var(--accent)" }}
-                  >
-                    {item.year}
-                  </span>
+                  <span className="num">{item.year}</span>
                   <h3 className="mt-3 text-[1.02rem]">{item.title}</h3>
-                  <p className="mono mt-1 text-[0.72rem] muted">
+                  <p className="mt-1 text-[0.78rem] font-semibold tracking-[0.04em] text-[var(--muted-2)] uppercase">
                     {item.organisation}
                   </p>
                   <p className="mt-3 text-sm muted">{item.body}</p>
@@ -98,9 +94,7 @@ export default function About() {
                     key={skill.category}
                     className="grid gap-1 border-b border-[var(--border)] py-4 sm:grid-cols-[10rem_1fr] sm:gap-6"
                   >
-                    <dt className="mono text-[0.72rem] uppercase tracking-[0.12em] muted">
-                      {skill.category}
-                    </dt>
+                    <dt className="label mb-0 pt-1">{skill.category}</dt>
                     <dd className="text-sm">{skill.items}</dd>
                   </div>
                 ))}
@@ -116,12 +110,12 @@ export default function About() {
                   href={about.education.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h3 link-underline inline-block"
+                  className="link-underline h3 inline-block"
                 >
                   {about.education.institution}
                 </a>
                 <p className="mt-3 text-sm muted">{about.education.degree}</p>
-                <p className="mono mt-1 text-[0.75rem] muted">
+                <p className="mt-1 text-[0.8rem] muted">
                   {about.education.period}
                 </p>
               </div>
@@ -135,7 +129,7 @@ export default function About() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="pill capitalize transition-colors hover:border-[var(--accent)]"
+                      className="pill capitalize"
                     >
                       {key}
                     </a>

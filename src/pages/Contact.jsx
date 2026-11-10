@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PageHeader, Reveal, SectionHeading } from "../components/ui";
+import { Icon, PageHeader, Reveal, SectionHeading } from "../components/ui";
 import { packages, site, socialLinks } from "../data";
 
 const nextSteps = [
@@ -62,34 +62,32 @@ export default function Contact() {
               <span className="eyebrow">Direct</span>
               <a
                 href={`mailto:${site.email}`}
-                className="mt-5 block break-words link-underline"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(1.4rem, 3vw, 2rem)",
-                  letterSpacing: "-0.02em",
-                }}
+                className="link-underline mt-5 inline-block break-words text-[1.35rem] font-bold tracking-tight text-[var(--ink)] sm:text-[1.75rem]"
               >
                 {site.email}
               </a>
 
               <dl className="mt-9 border-t border-[var(--border)]">
-                <div className="flex justify-between gap-6 border-b border-[var(--border)] py-4">
-                  <dt className="mono text-[0.72rem] uppercase tracking-[0.12em] muted">
+                <div className="flex items-center justify-between gap-6 border-b border-[var(--border)] py-4">
+                  <dt className="flex items-center gap-2.5 text-sm font-semibold text-[var(--ink)]">
+                    <Icon name="pin" className="h-[18px] w-[18px] text-[var(--navy)]" />
                     Based in
                   </dt>
-                  <dd className="text-sm">Ghana · remote-friendly</dd>
+                  <dd className="text-sm muted">Ghana · remote-friendly</dd>
                 </div>
-                <div className="flex justify-between gap-6 border-b border-[var(--border)] py-4">
-                  <dt className="mono text-[0.72rem] uppercase tracking-[0.12em] muted">
+                <div className="flex items-center justify-between gap-6 border-b border-[var(--border)] py-4">
+                  <dt className="flex items-center gap-2.5 text-sm font-semibold text-[var(--ink)]">
+                    <Icon name="clock" className="h-[18px] w-[18px] text-[var(--navy)]" />
                     Reply time
                   </dt>
-                  <dd className="text-sm">Within 1 working day</dd>
+                  <dd className="text-sm muted">Within 1 working day</dd>
                 </div>
-                <div className="flex justify-between gap-6 border-b border-[var(--border)] py-4">
-                  <dt className="mono text-[0.72rem] uppercase tracking-[0.12em] muted">
+                <div className="flex items-center justify-between gap-6 border-b border-[var(--border)] py-4">
+                  <dt className="flex items-center gap-2.5 text-sm font-semibold text-[var(--ink)]">
+                    <Icon name="check" className="h-[18px] w-[18px] text-[var(--navy)]" />
                     Availability
                   </dt>
-                  <dd className="text-sm">Taking new projects</dd>
+                  <dd className="text-sm muted">Taking new projects</dd>
                 </div>
               </dl>
 
@@ -100,7 +98,7 @@ export default function Contact() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pill capitalize transition-colors hover:border-[var(--accent)] hover:text-[var(--text)]"
+                    className="pill capitalize"
                   >
                     {key}
                   </a>
@@ -114,12 +112,7 @@ export default function Contact() {
                 {nextSteps.map((step, i) => (
                   <Reveal key={step.n} delay={i * 0.06}>
                     <li className="flex gap-5 border-b border-[var(--border)] py-5">
-                      <span
-                        className="mono text-[0.72rem]"
-                        style={{ color: "var(--accent)" }}
-                      >
-                        {step.n}
-                      </span>
+                      <span className="num mt-1">{step.n}</span>
                       <div>
                         <h3 className="text-[1.02rem]">{step.t}</h3>
                         <p className="mt-1.5 text-sm muted">{step.b}</p>
@@ -135,8 +128,7 @@ export default function Contact() {
           <Reveal delay={0.1}>
             <form
               onSubmit={onSubmit}
-              className="rounded-2xl border border-[var(--border)] p-6 sm:p-8"
-              style={{ backgroundColor: "var(--surface)" }}
+              className="rounded border border-[var(--border)] bg-white p-6 shadow-[0_4px_18px_rgba(16,24,40,0.06)] sm:p-8"
             >
               <h2 className="h3">Request a quote</h2>
               <p className="mt-2 text-sm muted">
@@ -146,9 +138,7 @@ export default function Contact() {
 
               <div className="mt-7 flex flex-col gap-4">
                 <label className="block">
-                  <span className="mono mb-2 block text-[0.7rem] uppercase tracking-[0.12em] muted">
-                    Your name
-                  </span>
+                  <span className="label">Your name</span>
                   <input
                     className="field"
                     type="text"
@@ -160,9 +150,7 @@ export default function Contact() {
                 </label>
 
                 <label className="block">
-                  <span className="mono mb-2 block text-[0.7rem] uppercase tracking-[0.12em] muted">
-                    Email
-                  </span>
+                  <span className="label">Email</span>
                   <input
                     className="field"
                     type="email"
@@ -174,9 +162,7 @@ export default function Contact() {
                 </label>
 
                 <label className="block">
-                  <span className="mono mb-2 block text-[0.7rem] uppercase tracking-[0.12em] muted">
-                    Package of interest
-                  </span>
+                  <span className="label">Package of interest</span>
                   <select
                     className="field"
                     value={form.package}
@@ -192,9 +178,7 @@ export default function Contact() {
                 </label>
 
                 <label className="block">
-                  <span className="mono mb-2 block text-[0.7rem] uppercase tracking-[0.12em] muted">
-                    About your project
-                  </span>
+                  <span className="label">About your project</span>
                   <textarea
                     className="field"
                     rows={5}
@@ -209,7 +193,7 @@ export default function Contact() {
                   Send enquiry
                 </button>
 
-                <p className="mono text-center text-[0.7rem] muted">
+                <p className="text-center text-[0.8rem] muted">
                   or email {site.email} directly
                 </p>
               </div>

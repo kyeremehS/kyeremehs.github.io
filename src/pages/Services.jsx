@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { CTABand, PageHeader, Reveal, SectionHeading } from "../components/ui";
+import { CTABand, Icon, PageHeader, Reveal, SectionHeading } from "../components/ui";
 import { services, stack, terms } from "../data";
+
+const serviceIcons = ["websites", "stores", "apps"];
 
 export default function Services() {
   return (
@@ -21,48 +23,39 @@ export default function Services() {
             id={service.id}
           >
             <Reveal>
-              <span className="mono text-[0.72rem] muted">{service.index}</span>
+              <span className="icon-line">
+                <Icon name={serviceIcons[i]} />
+              </span>
+              <span className="num">{service.index}</span>
               <h2 className="h2 mt-3">{service.title}</h2>
               <p className="lead mt-5">{service.body}</p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <span
-                  className="mono text-[0.95rem]"
-                  style={{ color: "var(--accent)" }}
-                >
+              <div className="mt-7 flex flex-wrap items-center gap-4">
+                <span className="text-lg font-bold text-[var(--navy)]">
                   {service.price}
                 </span>
                 <span className="pill">{service.deliverable}</span>
               </div>
-              <Link to="/contact" className="btn btn-ghost mt-7">
-                Discuss this →
+              <Link to="/contact" className="btn btn-primary mt-7">
+                Discuss this
               </Link>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <ul className="grid gap-x-8 gap-y-3.5 sm:grid-cols-2">
                 {service.points.map((point) => (
-                  <div
-                    key={point}
-                    className="rounded-xl border border-[var(--border)] p-4 text-sm"
-                    style={{ backgroundColor: "var(--surface)" }}
-                  >
-                    <span
-                      className="mono block text-[0.7rem]"
-                      style={{ color: "var(--accent)" }}
-                    >
-                      ✓
-                    </span>
-                    <span className="mt-2 block">{point}</span>
-                  </div>
+                  <li key={point} className="flex gap-3 text-sm">
+                    <Icon name="check" className="check" />
+                    <span>{point}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </Reveal>
           </div>
         ))}
       </section>
 
       {/* STACK */}
-      <section className="section border-y border-[var(--border)] bg-[var(--bg-elev)]">
+      <section className="section band-alt border-y border-[var(--border)]">
         <div className="container-x">
           <SectionHeading
             eyebrow="Tech stack"
@@ -95,9 +88,7 @@ export default function Services() {
                   key={term}
                   className="flex gap-4 border-b border-[var(--border)] py-4 text-sm muted"
                 >
-                  <span className="mono shrink-0" style={{ color: "var(--accent)" }}>
-                    —
-                  </span>
+                  <span className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--amber)]" />
                   <span>{term}</span>
                 </li>
               ))}

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { CTABand, PageHeader, Reveal, SectionHeading } from "../components/ui";
+import { CTABand, Icon, PageHeader, Reveal, SectionHeading } from "../components/ui";
 import { socialLinks, workStatus } from "../data";
+
+const workIcons = ["websites", "stores", "apps", "target"];
 
 export default function Work() {
   return (
@@ -15,11 +17,12 @@ export default function Work() {
         <div className="grid gap-6 sm:grid-cols-2">
           {workStatus.takingOn.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.07}>
-              <div className="card card-accent h-full">
-                <span className="mono text-[0.72rem] muted">
-                  0{i + 1}
+              <div className="card h-full">
+                <span className="icon-line">
+                  <Icon name={workIcons[i]} />
                 </span>
-                <h3 className="h3 mt-4">{item.title}</h3>
+                <span className="num">0{i + 1}</span>
+                <h3 className="h3 mt-3">{item.title}</h3>
                 <p className="mt-3 text-sm muted">{item.body}</p>
               </div>
             </Reveal>
@@ -27,7 +30,7 @@ export default function Work() {
         </div>
       </section>
 
-      <section className="section border-y border-[var(--border)] bg-[var(--bg-elev)]">
+      <section className="section band-alt border-y border-[var(--border)]">
         <div className="container-x grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <SectionHeading
             eyebrow="Case studies"
@@ -57,9 +60,7 @@ export default function Work() {
                   key={item.n}
                   className="flex gap-5 border-b border-[var(--border)] py-5"
                 >
-                  <span className="mono text-[0.72rem]" style={{ color: "var(--accent)" }}>
-                    {item.n}
-                  </span>
+                  <span className="num mt-1">{item.n}</span>
                   <div>
                     <h3 className="text-[1.02rem]">{item.t}</h3>
                     <p className="mt-1.5 text-sm muted">{item.b}</p>
@@ -72,10 +73,10 @@ export default function Work() {
       </section>
 
       <section className="section container-x text-center">
-        <Reveal className="mx-auto max-w-2xl">
-          <span className="eyebrow justify-center flex">Code</span>
+        <Reveal className="mx-auto flex max-w-2xl flex-col items-center">
+          <span className="eyebrow">Code</span>
           <h2 className="h2 mt-4">Some of it is open.</h2>
-          <p className="lead mt-5 mx-auto">
+          <p className="lead mt-5">
             Experiments, pipelines and tools I've built are on GitHub — a fair
             picture of how I write and ship code.
           </p>
@@ -88,7 +89,7 @@ export default function Work() {
             >
               View GitHub
             </a>
-            <Link to="/contact" className="btn btn-ghost">
+            <Link to="/contact" className="btn btn-outline">
               Start a project
             </Link>
           </div>
